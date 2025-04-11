@@ -7,7 +7,7 @@ license = "MIT"
 description = "A native Rust AutoML pipeline toolkit"
 repository = "https://github.com/okanyenigun/rotoml"
 readme = "README.md"
-keywords = ["machine-learning", "automl", "pipeline", "rust", "ai", "agent"]
+keywords = ["machine-learning", "automl", "ai", "agent", "data-science"]
 categories = ["science", "algorithms", "data-structures"]
 
 [dependencies]
