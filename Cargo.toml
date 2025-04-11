@@ -1,7 +1,14 @@
 [package]
 name = "rotoml"
 version = "0.1.0"
+authors = ["Okan Yenigün okanyenigun@gmail.com"]
 edition = "2021"
+license = "MIT"
+description = "A native Rust AutoML pipeline toolkit"
+repository = "https://github.com/okanyenigun/rotoml"
+readme = "README.md"
+keywords = ["machine-learning", "automl", "pipeline", "rust", "ai", "agent"]
+categories = ["science", "algorithms", "data-structures"]
 
 [dependencies]
 csv = "1.1"
