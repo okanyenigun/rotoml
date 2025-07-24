@@ -1,6 +1,6 @@
 [package]
 name = "rotoml"
-version = "0.1.0"
+version = "0.1.1"
 authors = ["Okan Yenigün okanyenigun@gmail.com"]
 edition = "2021"
 license = "MIT"
@@ -11,14 +11,5 @@ keywords = ["machine-learning", "automl", "ai", "agent", "data-science"]
 categories = ["science", "algorithms", "data-structures"]
 
 [dependencies]
-csv = "1.1"
-ndarray = "0.15"
-linfa = "0.6.0"
-linfa-trees = "0.6.0"
-linfa-datasets = { version = "0.6.0", features = ["iris"]}
-serde = { version = "1.0", features = ["derive"] } 
-anyhow = "1.0"  
-thiserror = "1.0" 
-ndarray-csv = "0.5"
-rand = "0.8"  # Add this
-
+polars = { version = "0.33.2", features = ["lazy", "csv", "dtype-full", "strings"] }
+clap = { version = "4.0", features = ["derive"] }
