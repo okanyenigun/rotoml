@@ -9,7 +9,7 @@ repository = "https://github.com/okanyenigun/rotoml"
 readme = "README.md"
 keywords = ["machine-learning", "automl", "ai", "agent", "data-science"]
 categories = ["science", "algorithms", "data-structures"]
-exclude = ["datasets/", "tkns.txt", "private_notes.txt", "data_report.md"]
+exclude = ["datasets/", "tkns.txt", "private_notes.txt", "data_report.md", "temp.rs"]
 
 [dependencies]
 polars = { version = "0.33.2", features = ["lazy", "csv", "parquet", "dtype-full", "strings"] }
