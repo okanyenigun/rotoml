@@ -12,5 +12,5 @@ categories = ["science", "algorithms", "data-structures"]
 exclude = ["datasets/", "tkns.txt", "private_notes.txt", "data_report.md"]
 
 [dependencies]
-polars = { version = "0.33.2", features = ["lazy", "csv", "dtype-full", "strings"] }
+polars = { version = "0.33.2", features = ["lazy", "csv", "parquet", "dtype-full", "strings"] }
 clap = { version = "4.0", features = ["derive"] }

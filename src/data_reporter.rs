@@ -1,3 +1,4 @@
+use crate::data_operations::DataOperations;
 use polars::prelude::*;
 use std::error::Error;
 use std::fs;
@@ -93,6 +94,61 @@ impl DataReporter {
             "- **Categorical Columns:** {}\n",
             Self::count_categorical_columns(df)
         ));
+
+        // Duplicate columns analysis
+        report.push_str("\n### Duplicate Columns Analysis\n\n");
+        let duplicate_columns = DataOperations::detect_duplicate_columns(df)?;
+
+        if duplicate_columns.is_empty() {
+            report.push_str("✅ **No duplicate columns found.**\n\n");
+        } else {
+            report.push_str(&format!(
+                "⚠️ **Found {} group(s) of duplicate columns:**\n\n",
+                duplicate_columns.len()
+            ));
+
+            for (original, duplicates) in &duplicate_columns {
+                report.push_str(&format!("- Column `{}` is duplicated by:\n", original));
+                for dup in duplicates {
+                    report.push_str(&format!("  - `{}`\n", dup));
+                }
+                report.push_str("\n");
+            }
+        }
+
+        // Duplicate rows analysis
+        report.push_str("### Duplicate Rows Analysis\n\n");
+        let (duplicate_count, duplicate_indexes) = DataOperations::count_duplicate_rows(df)?;
+
+        if duplicate_count == 0 {
+            report.push_str("✅ **No duplicate rows found.**\n\n");
+        } else {
+            report.push_str(&format!(
+                "⚠️ **Found {} duplicate row(s):**\n\n",
+                duplicate_count
+            ));
+            report.push_str(&format!(
+                "- **Total duplicate rows:** {}\n",
+                duplicate_count
+            ));
+            report.push_str(&format!(
+                "- **Percentage of duplicates:** {:.2}%\n",
+                (duplicate_count as f64 / shape.0 as f64) * 100.0
+            ));
+
+            if duplicate_count <= 20 {
+                report.push_str(&format!(
+                    "- **Duplicate row indexes:** {:?}\n\n",
+                    duplicate_indexes
+                ));
+            } else {
+                report.push_str(&format!(
+                    "- **Duplicate row indexes (first 20):** {:?}\n",
+                    &duplicate_indexes[..20]
+                ));
+                report.push_str(&format!("  - ... and {} more\n\n", duplicate_count - 20));
+            }
+        }
 
         // write report to file
         fs::write(output_path, report)?;
